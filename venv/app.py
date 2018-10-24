@@ -14,12 +14,12 @@ ns = api.namespace('Hangman', description='We are going to play hangman. '
 parser = api.parser()
 #hangman_database = SQLAlchemy(app)
 
-class single_game(hangman_database.Model):
-    id = hangman_database.Column(hangman_database.Integer, primary_key=True)
-    magic_word = hangman_database.Column(hangman_database.String)
-    known_letters = hangman_database.Column(hangman_database.String)
-    tries_left = hangman_database.Column(hangman_database.Integer)
-    guessed_letters = hangman_database.Column(hangman_database.String)
+#class single_game(hangman_database.Model):
+#    id = hangman_database.Column(hangman_database.Integer, primary_key=True)
+#    magic_word = hangman_database.Column(hangman_database.String)
+#    known_letters = hangman_database.Column(hangman_database.String)
+#    tries_left = hangman_database.Column(hangman_database.Integer)
+#    guessed_letters = hangman_database.Column(hangman_database.String)
 
 
 #hangman_database.create_all()
