@@ -12,7 +12,7 @@ api = Api(app, title='HangMan Game', version='2.0', description='8 Letter Hangma
 ns = api.namespace('Hangman', description='We are going to play hangman. '
                                           'Please only guess lowercase letters. You only have 6 guesses')
 parser = api.parser()
-hangman_database = SQLAlchemy(app)
+#hangman_database = SQLAlchemy(app)
 
 class single_game(hangman_database.Model):
     id = hangman_database.Column(hangman_database.Integer, primary_key=True)
@@ -22,32 +22,32 @@ class single_game(hangman_database.Model):
     guessed_letters = hangman_database.Column(hangman_database.String)
 
 
-hangman_database.create_all()
+#hangman_database.create_all()
 
-@ns.route('/game')
-@app.route('/game', methods=['GET', 'POST'])
-class make_game(Resource):
-
-    BagOfWords = ["zigzaggy", "skipjack", "aardvark", "butthead", "testings", "zabajone", "jezebels", "cybersex"]
-    MagicWord = BagOfWords[randint(0, 7)]
-    known = "********"
-    tries = 6
-    word_bank = ""
-
-    @ns.doc("Creates a new game and returns the game ID")
-    def post(self):
-        i = 0
-        while hangman_database.session.query(single_game.id).filter_by(id=i).scalar() is not None:
-            i = i + 1
-        game_to_be_added = single_game(id = i,
-                                       magic_word = self.MagicWord,
-                                       known_letters = self.known,
-                                       tries_left = self.tries,
-                                       guessed_letters = self.word_bank)
-        hangman_database.session.add(game_to_be_added)
-        hangman_database.session.commit()
-        hangman_database.session.close()
-        return "this is the game ID " + i
+#@ns.route('/game')
+#@app.route('/game', methods=['GET', 'POST'])
+#class make_game(Resource):
+#
+#    BagOfWords = ["zigzaggy", "skipjack", "aardvark", "butthead", "testings", "zabajone", "jezebels", "cybersex"]
+#    MagicWord = BagOfWords[randint(0, 7)]
+#    known = "********"
+#    tries = 6
+#    word_bank = ""
+#
+#    @ns.doc("Creates a new game and returns the game ID")
+#    def post(self):
+#        i = 0
+#        while hangman_database.session.query(single_game.id).filter_by(id=i).scalar() is not None:
+#            i = i + 1
+#        game_to_be_added = single_game(id = i,
+#                                       magic_word = self.MagicWord,
+#                                       known_letters = self.known,
+#                                       tries_left = self.tries,
+#                                       guessed_letters = self.word_bank)
+#        hangman_database.session.add(game_to_be_added)
+#        hangman_database.session.commit()
+#        hangman_database.session.close()
+#        return "this is the game ID " + i
 
 
 
